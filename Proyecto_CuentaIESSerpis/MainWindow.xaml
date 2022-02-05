@@ -1,0 +1,77 @@
+﻿<Window x:Class="Proyecto_CuentaIESSerpis.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proyecto_CuentaIESSerpis"
+        mc:Ignorable="d"
+        Title="Mi Cuenta IES_Serpis" Height="450" Width="400">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Proyecto_CuentaIESSerpis;component/Estilos/MiEstilo.xaml">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Style="{StaticResource Espaciado}">
+
+        <!-- Grid que se muestra cuando se entra con el rol de docente
+            (se desactiva la visibilidad del GridAlumno) -->
+        <Grid x:Name="GridDocente">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="6*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.ColumnSpan="2" x:Name="saludoDocente" Content="Hola NombreDocente" Style="{StaticResource Titulo}"/>
+            <Label Grid.Row="1" Grid.ColumnSpan="2" Content="Bienvenid@ a tu cuenta IES-Serpis." Style="{StaticResource Espaciado}"/>
+            <Label Grid.Row="2" x:Name="asignaturaDocente" Content="NombreAsignatura" Style="{StaticResource Espaciado}"/>
+            <Button Grid.Row="2" Grid.Column="1" x:Name="editarNotasBtn" Content="Editar Notas" Style="{StaticResource Botones}"/>
+
+            <DataGrid Grid.Row="3" Grid.ColumnSpan="2" x:Name="listaAlumnos"/>
+        </Grid>
+
+        <!-- Grid que se muestra cuando se entra con el rol de alumno
+            (se desactiva la visibilidad del GridDocente) -->
+        <Grid x:Name="GridAlumno">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="6*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.ColumnSpan="2" x:Name="saludoAlumno" Content="Hola NombreAlumno" Style="{StaticResource Titulo}"/>
+            <Label Grid.Row="1" Grid.ColumnSpan="2" Content="Bienvenid@ a tu cuenta IES-Serpis." Style="{StaticResource Espaciado}"/>
+            <ComboBox Grid.Row="2" x:Name="asignaturaAlumno"  Style="{StaticResource Espaciado}">
+                <!-- De momento he puesto items de ejemplo -->
+                <ComboBoxItem IsSelected="True">Seleccciona la asignatura</ComboBoxItem>
+                <ComboBoxItem>Lengua Castellana</ComboBoxItem>
+                <ComboBoxItem>Matemáticas</ComboBoxItem>
+                <ComboBoxItem>Inglés</ComboBoxItem>
+                <ComboBoxItem>Historia</ComboBoxItem>
+                <ComboBoxItem>Ciencias Naturales</ComboBoxItem>
+                <ComboBoxItem>Geografía</ComboBoxItem>
+            </ComboBox>
+            <Button Grid.Row="2" Grid.Column="1" x:Name="consultarNotasBtn" Content="Consultar Notas" Style="{StaticResource Botones}"/>
+
+            <DataGrid Grid.Row="3" Grid.ColumnSpan="2" x:Name="notasAlumno"/>
+        </Grid>
+
+    </Grid>
+</Window>
