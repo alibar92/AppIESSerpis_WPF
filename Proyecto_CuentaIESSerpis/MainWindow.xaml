@@ -3,9 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:adorners="http://gu.se/Adorners" 
         xmlns:local="clr-namespace:Proyecto_CuentaIESSerpis"
         mc:Ignorable="d"
-        Title="Mi Cuenta IES_Serpis" Height="450" Width="400">
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        Background="#F9FBF7"
+        FontFamily="{materialDesign:MaterialDesignFont}"        WindowStartupLocation="CenterScreen" 
+        
+        Title="Mi Cuenta IES_Serpis" Height="500" Width="600">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -16,6 +24,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <!-- Grid contenedor de los otros dos Grid -->
     <Grid Style="{StaticResource Espaciado}">
 
         <!-- Grid que se muestra cuando se entra con el rol de docente
@@ -30,15 +39,30 @@
                 <RowDefinition Height ="1*"/>
                 <RowDefinition Height ="1*"/>
                 <RowDefinition Height ="1*"/>
-                <RowDefinition Height ="6*"/>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="2*"/>
+                <RowDefinition Height ="4*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.ColumnSpan="2" x:Name="saludoDocente" Content="Hola NombreDocente" Style="{StaticResource Titulo}"/>
-            <Label Grid.Row="1" Grid.ColumnSpan="2" Content="Bienvenid@ a tu cuenta IES-Serpis." Style="{StaticResource Espaciado}"/>
-            <Label Grid.Row="2" x:Name="asignaturaDocente" Content="NombreAsignatura" Style="{StaticResource Espaciado}"/>
-            <Button Grid.Row="2" Grid.Column="1" x:Name="editarNotasBtn" Content="Editar Notas" Style="{StaticResource Botones}"/>
+            <Button Grid.Column="1" Style="{StaticResource LinkButton}">
+                <Hyperlink Foreground="#EE93A9" Click="click_cerrarSesion">Cerrar Sesión</Hyperlink>
+            </Button>
+            <Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="saludoDocente" Content="Hola NombreDocente" Style="{StaticResource Titulo}"/>
+            <Label Grid.Row="2" Grid.ColumnSpan="2" Content="Bienvenid@ a tu cuenta IES-Serpis." Style="{StaticResource Espaciado}"/>
+            <Label Grid.Row="3" x:Name="asignaturaDocente" Content="NombreAsignatura" Style="{StaticResource Titulo}"/>
 
-            <DataGrid Grid.Row="3" Grid.ColumnSpan="2" x:Name="listaAlumnos"/>
+            <Button Grid.Row="4" Grid.Column="1" x:Name="editarNotasBtn" Content="Editar Notas"
+                    Style="{DynamicResource MaterialDesignRaisedLightButton}" Click="click_EditarNotas"/>
+
+            <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" x:Name="cambioNotasStackPanel" Style="{StaticResource Espaciado}" >
+                <TextBox  x:Name="niaTextBox" adorners:Watermark.Text="NIA" Style="{StaticResource TxtBoxesStackPanel}"/>
+                <TextBox  x:Name="nota1TextBox" adorners:Watermark.Text="Nota 1" Style="{StaticResource TxtBoxesStackPanel}"/>
+                <TextBox  x:Name="nota2TextBox" adorners:Watermark.Text="Nota 2" Style="{StaticResource TxtBoxesStackPanel}"/>
+                <TextBox  x:Name="nota3TextBox" adorners:Watermark.Text="Nota 3" Style="{StaticResource TxtBoxesStackPanel}"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="6" Grid.ColumnSpan="2" x:Name="listaAlumnos"/>
         </Grid>
 
         <!-- Grid que se muestra cuando se entra con el rol de alumno
@@ -53,13 +77,19 @@
                 <RowDefinition Height ="1*"/>
                 <RowDefinition Height ="1*"/>
                 <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="1*"/>
+                <RowDefinition Height ="0.5*"/>
                 <RowDefinition Height ="6*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.ColumnSpan="2" x:Name="saludoAlumno" Content="Hola NombreAlumno" Style="{StaticResource Titulo}"/>
-            <Label Grid.Row="1" Grid.ColumnSpan="2" Content="Bienvenid@ a tu cuenta IES-Serpis." Style="{StaticResource Espaciado}"/>
-            <ComboBox Grid.Row="2" x:Name="asignaturaAlumno"  Style="{StaticResource Espaciado}">
-                <!-- De momento he puesto items de ejemplo -->
+            <Button Grid.Column="1" Style="{StaticResource LinkButton}">
+                <Hyperlink Foreground="#EE93A9" Click="click_cerrarSesion">Cerrar Sesión</Hyperlink>
+            </Button>
+            <Label Grid.Row="1" Grid.ColumnSpan="2" x:Name="saludoAlumno" Content="Hola NombreAlumno" Style="{StaticResource Titulo}"/>
+            <Label Grid.Row="2" Grid.ColumnSpan="2" Content="Bienvenid@ a tu cuenta IES-Serpis." Style="{StaticResource Espaciado}"/>
+            
+            <ComboBox Grid.Row="3" x:Name="asignaturaAlumno"  Style="{StaticResource Espaciado}">
+                <!--De momento he puesto items de ejemplo -->
                 <ComboBoxItem IsSelected="True">Seleccciona la asignatura</ComboBoxItem>
                 <ComboBoxItem>Lengua Castellana</ComboBoxItem>
                 <ComboBoxItem>Matemáticas</ComboBoxItem>
@@ -68,9 +98,12 @@
                 <ComboBoxItem>Ciencias Naturales</ComboBoxItem>
                 <ComboBoxItem>Geografía</ComboBoxItem>
             </ComboBox>
-            <Button Grid.Row="2" Grid.Column="1" x:Name="consultarNotasBtn" Content="Consultar Notas" Style="{StaticResource Botones}"/>
-
-            <DataGrid Grid.Row="3" Grid.ColumnSpan="2" x:Name="notasAlumno"/>
+            
+            <Button Grid.Row="3" Grid.Column="1" x:Name="consultarNotasBtn" Content="Consultar Notas" 
+                    Style="{DynamicResource MaterialDesignRaisedLightButton}" Click="click_consultarNotas"/>
+            <Separator Grid.Row="4" Grid.ColumnSpan="2"/>
+            
+            <DataGrid Grid.Row="5" Grid.ColumnSpan="2" x:Name="notasAlumnoDataGrid"/>
         </Grid>
 
     </Grid>

@@ -3,8 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:adorners="http://gu.se/Adorners" 
         xmlns:local="clr-namespace:Proyecto_CuentaIESSerpis"
         mc:Ignorable="d"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        Background="#F9FBF7"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        
         Title="Mi Cuenta IES-Serpis" Height="450" Width="400">
 
     <Window.Resources>
@@ -16,11 +26,12 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <!-- Grid contenedor de los otros dos Grid -->
     <Grid Style="{StaticResource Espaciado}">
 
         <!-- Grid que se muestra para hacer login nada mas inicializar la app
             (se desactiva la visibilidad del GridRegistro) -->
-        <Grid x:Name="GridLogin" Grid.RowSpan="2">
+        <Grid x:Name="GridLogin">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -32,18 +43,18 @@
             </Grid.RowDefinitions>
 
             <Label Content="IES-Serpis Login" Style="{StaticResource Titulo}"/>
-            <TextBox Grid.Row="1" x:Name="usuarioTxtBox" Tag="NIA/NID" Style="{StaticResource MyWaterMarkStyle1}"/>
-            <PasswordBox Grid.Row="2" x:Name="passwordBox" Tag="Contraseña" Style="{StaticResource MyWaterMarkStyle2}"/>
-            <Button Grid.Row="3" x:Name="loginBtn" Content="Login" Style="{StaticResource Botones}"/>
-            <Label Grid.Row="4" Content="---O---" Style="{StaticResource Titulo}"/>
+            <TextBox Grid.Row="1" x:Name="usuarioTxtBox" adorners:Watermark.Text="NIA/NID" Style="{StaticResource TextBoxes}"/>
+            <PasswordBox Grid.Row="2" x:Name="passwordBox" adorners:Watermark.Text="Contraseña" Style="{StaticResource TextBoxes}"/>
+            <Button Grid.Row="3" x:Name="loginBtn" Content="Login" Style="{DynamicResource MaterialDesignRaisedLightButton}" Click="click_login"/>
+            <Label Grid.Row="4" Content="- o -" Style="{StaticResource Titulo}" />
             <Button Grid.Row="5" x:Name="registrateLink" Style="{StaticResource LinkButton}">
-                <Hyperlink>Regístrate</Hyperlink>
+                <Hyperlink Foreground="#EE93A9" Click="click_registrarse">Regístrate</Hyperlink>
             </Button>
         </Grid>
 
         <!-- Grid que se muestra al pinchar en el registrateLink
             (se desactiva la visibilidad del GridLogin) -->
-        <Grid x:Name="GridRegistro" Grid.RowSpan="2">
+        <Grid x:Name="GridRegistro">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -55,14 +66,14 @@
             </Grid.RowDefinitions>
 
             <Label Content="Registro" Style="{StaticResource Titulo}"/>
-            <TextBox Grid.Row="1" x:Name="usuarioRegTxtBox" Tag="NIA/NID" Style="{StaticResource MyWaterMarkStyle1}"/>
-            <PasswordBox Grid.Row="2" x:Name="passwordBoxReg" Tag="Contraseña" Style="{StaticResource MyWaterMarkStyle2}"/>
-            <Button Grid.Row="3" x:Name="registrateBtn" Content="Regístrate" Style="{StaticResource Botones}"/>
-            <Label Grid.Row="4" Content="---O---" Style="{StaticResource Titulo}" />
+            <TextBox Grid.Row="1" x:Name="usuarioTxtBoxReg" adorners:Watermark.Text="NIA/NID" Style="{StaticResource TextBoxes}"/>
+            <PasswordBox Grid.Row="2" x:Name="passwordBoxReg" adorners:Watermark.Text="Contraseña" Style="{StaticResource TextBoxes}"/>
+            <Button Grid.Row="3" x:Name="registrateBtn" Content="Regístrate" Style="{DynamicResource MaterialDesignRaisedLightButton}" Click="click_registro"/>
+            <Label Grid.Row="4" Content="- o -" Style="{StaticResource Titulo}" />
             <Button Grid.Row="5" Style="{StaticResource LinkButton}">
-                <Hyperlink>Iniciar Sesión</Hyperlink>
+                <Hyperlink Foreground="#EE93A9" Click="click_iniciarSesion">Iniciar Sesión</Hyperlink>
             </Button>
         </Grid>
 
-    </Grid>
+    </Grid>
 </Window>

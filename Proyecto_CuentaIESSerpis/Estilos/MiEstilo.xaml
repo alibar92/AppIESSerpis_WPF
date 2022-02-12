@@ -11,79 +11,26 @@
     </Style>
 
     <Style x:Key="TextBoxes" BasedOn="{StaticResource Espaciado}">
-        <Setter Property="Control.Width" Value="200"/>
+        <Setter Property="Control.Width" Value="160"/>
         <Setter Property="Control.Height" Value="25"/>
     </Style>
 
+    <!-- He remplazado el estilo estatico de los botones por el dinamico de MaterialDesign
+        Sigo utilizando este estilo para los linkButtons-->
     <Style x:Key="Botones" BasedOn="{StaticResource Espaciado}">
         <Setter Property="Control.Width" Value="120"/>
+        <Setter Property="Control.Height" Value="23"/>
+    </Style>
+
+
+    <Style x:Key="TxtBoxesStackPanel" BasedOn="{StaticResource Espaciado}">
+        <Setter Property="Control.Width" Value="60"/>
         <Setter Property="Control.Height" Value="25"/>
     </Style>
-    
+
     <Style x:Key="LinkButton" TargetType="Button" BasedOn="{StaticResource Botones}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="White" />
-    </Style>
-
-    <!-- Estilos para crear las marcas de agua de Textbox y Passwordbox -->
-    <Style x:Key="MyWaterMarkStyle1" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxes}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Grid>
-                        <TextBox Text="{Binding Path=Text,
-                                                RelativeSource={RelativeSource TemplatedParent}, 
-                                                Mode=TwoWay,
-                                                UpdateSourceTrigger=PropertyChanged}"
-                                 x:Name="textSource" 
-                                 Background="Transparent" 
-                                 Panel.ZIndex="2" />
-                        <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Setter Property="Foreground" Value="Transparent"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                            <Setter Property="Foreground" Value="LightGray"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <Style x:Key="MyWaterMarkStyle2" TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource TextBoxes}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type PasswordBox}">
-                    <Grid>
-                        <TextBox Text="{Binding Path=Text,
-                                                RelativeSource={RelativeSource TemplatedParent}, 
-                                                Mode=TwoWay,
-                                                UpdateSourceTrigger=PropertyChanged}"
-                                 x:Name="textSource" 
-                                 Background="Transparent" 
-                                 Panel.ZIndex="2" />
-                        <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Setter Property="Foreground" Value="Transparent"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                            <Setter Property="Foreground" Value="LightGray"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
 </ResourceDictionary>
